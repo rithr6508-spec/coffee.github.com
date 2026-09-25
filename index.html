@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bean & Brew Coffee</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <div class="logo">☕ Bean & Brew</div>
+
+  <nav>
+    <a href="#home">ទំព័រដើម</a>
+    <a href="#menu">ម៉ឺនុយ</a>
+    <a href="#contact">ទំនាក់ទំនង</a>
+  </nav>
+
+  <button class="cart-btn" onclick="openCart()">
+    🛒 <span id="cartCount">0</span>
+  </button>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <h1>កាហ្វេឆ្ងាញ់☕<br></h1>
+
+    <p>
+      កាហ្វេថ្មីៗ ផឺកដោយមានទំនុកចិត្ត
+    </p>
+
+    <button onclick="scrollToMenu()" class="main-Btn">
+      មើលម៉ឺនុយ
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="menu" id="menu">
+
+  <h2>☕ ម៉ឺនុយកាហ្វេ</h2>
+
+  <div class="products">
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+
+      <img
+        src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80"
+        alt="Espresso"
+      >
+
+      <div class="product-info">
+
+        <h3>Espresso</h3>
+
+        <p>កាហ្វេខ្លាំង ក្លិនឈ្ងុយ</p>
+
+        <strong>$3.00</strong>
+
+        <button
+          onclick="addToCart('Espresso', 3)"
+          class="buy-btn"
+        >
+          បន្ថែមទៅកន្ត្រក
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 2 -->
+    <div class="product">
+
+      <img
+        src="https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?auto=format&fit=crop&w=700&q=80"
+        alt="Cappuccino"
+      >
+
+      <div class="product-info">
+
+        <h3>Cappuccino</h3>
+
+        <p>ទឹកដោះគោ និង Foam ទន់ៗ</p>
+
+        <strong>$4.50</strong>
+
+        <button
+          onclick="addToCart('Cappuccino', 4.5)"
+          class="buy-btn"
+        >
+          បន្ថែមទៅកន្ត្រក
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 3 -->
+    <div class="product">
+
+      <img
+        src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80"
+        alt="Iced Coffee"
+      >
+
+      <div class="product-info">
+
+        <h3>Iced Coffee</h3>
+
+        <p>កាហ្វេទឹកកក ស្រស់ស្រាយ</p>
+
+        <strong>$4.00</strong>
+
+        <button
+          onclick="addToCart('Iced Coffee', 4)"
+          class="buy-btn"
+        >
+          បន្ថែមទៅកន្ត្រក
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 4 -->
+    <div class="product">
+
+      <img
+        src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=700&q=80"
+        alt="Latte"
+      >
+
+      <div class="product-info">
+
+        <h3>Latte</h3>
+
+        <p>កាហ្វេទឹកដោះគោ រសជាតិទន់</p>
+
+        <strong>$4.50</strong>
+
+        <button
+          onclick="addToCart('Latte', 4.5)"
+          class="buy-btn"
+        >
+          បន្ថែមទៅកន្ត្រក
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CART MODAL -->
+<div class="modal" id="cartModal">
+
+  <div class="cart-box">
+
+    <button class="close" onclick="closeCart()">×</button>
+
+    <h2>🛒 កន្ត្រកទំនិញ</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      សរុប:
+      <strong>$<span id="cartTotal">0.00</span></strong>
+    </div>
+
+    <button
+      class="checkout-btn"
+      onclick="openCheckout()"
+    >
+      ទិញ / Checkout
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CHECKOUT -->
+<div class="modal" id="checkoutModal">
+
+  <div class="checkout-box">
+
+    <button class="close" onclick="closeCheckout()">×</button>
+
+    <h2>🧾 បញ្ជាទិញ</h2>
+
+    <form id="checkoutForm">
+
+      <label>ឈ្មោះ</label>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="បញ្ចូលឈ្មោះ"
+        required
+      >
+
+
+      <label>លេខទូរស័ព្ទ</label>
+
+      <input
+        type="tel"
+        id="customerPhone"
+        placeholder="012 345 678"
+        required
+      >
+
+
+      <label>អាសយដ្ឋានដឹកជញ្ជូន</label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="បញ្ចូលអាសយដ្ឋាន"
+        required
+      ></textarea>
+
+
+      <label>ការទូទាត់</label>
+
+      <select id="paymentMethod">
+
+        <option value="Cash on Delivery">
+          💵 បង់ប្រាក់ពេលទទួល
+        </option>
+
+        <option value="QR Payment">
+          📱 QR Payment
+        </option>
+
+      </select>
+      <label>ការទូទាត់</label>
+
+<!-- ដាក់ QR ត្រង់នេះ -->
+<div id="qrPayment" class="qr-payment">
+
+  <h3>📱 បង់ប្រាក់តាម ABA QR</h3>
+
+  <img
+    src="Qr.jpg" height="100"
+    alt="ABA QR Payment"
+    class="qr-image"
+  >
+
+  <p>ស្កេន QR ដើម្បីបង់ប្រាក់</p>
+
+  <p>
+    <strong>ABA: 018 243 689</strong>
+  </p>
+
+</div>
+
+
+
+      <div class="checkout-total">
+        សរុប:
+        <strong>
+          $<span id="checkoutTotal">0.00</span>
+        </strong>
+      </div>
+
+
+      <button
+        type="submit"
+        class="order-btn"
+      >
+        ✅ បញ្ជាទិញ
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- CHAT BUTTON -->
+<button class="chat-button" onclick="toggleChat()">
+  💬
+</button>
+
+
+<!-- CHAT -->
+<div class="chat-box" id="chatBox">
+
+  <div class="chat-header">
+
+    ☕ Bean & Brew
+
+    <span onclick="toggleChat()">×</span>
+
+  </div>
+
+
+  <div
+    class="chat-messages"
+    id="chatMessages"
+  >
+
+    <div class="bot-message">
+      សួស្តី 👋 តើខ្ញុំអាចជួយអ្វីអ្នកបាន?
+    </div>
+
+  </div>
+
+
+  <div class="chat-input">
+
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="សរសេរសារ..."
+      onkeypress="handleChatKey(event)"
+    >
+
+    <button onclick="sendMessage()">
+      ផ្ញើ
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer id="contact">
+
+  <h3>☕ Bean & Brew Coffee</h3>
+
+  <p>📞 0975446520</p>
+
+  <p>📍Takeo province ,Cambodia</p>
+
+  <p>© 2026 Bean & Brew</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
